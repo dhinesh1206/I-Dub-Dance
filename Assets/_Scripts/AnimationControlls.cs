@@ -10,7 +10,7 @@ public class AnimationControlls : MonoBehaviour {
 	public static AnimationControlls instance;
 
 	public Animator charAnimation;
-	public AudioSource audio;
+    public AudioSource audioSource;
 	public AudioClip audioTest;
 	public objectsinHand objectinHand;
 	public GameObject effectImage;
@@ -20,28 +20,17 @@ public class AnimationControlls : MonoBehaviour {
 	public string audioKey;
 	public string EndAnimationKey = null;
 	public List<EffectName> effects;
-
 	public Animator effectcharAnimator;
 	public Transform[] instantiationPoint;
-	public Transform initialCharPoint;
-
-
-	public GameObject effectSelectionScreen;
-	public GameObject effectSelectionCamera;
-	public GameObject arCamera;
-	public GameObject mainMenu;
-
-	public List<FallObjectsIming> fallingObjects;
-
 	public FaceExpressions expTime;
 	public Renderer mainBody;
-
 	public GameObject instantiatedImage;
 	public int charecterSelectionIndex;
 	public Transform[] fallingObjectsParent;
 	public GameObject fallingObjectsEndParent;
+    public ExpressionHolder expressionHolder;
 
-	private GameObject[] temp;
+	//private GameObject[] temp;
 
 	void OnEnable() 
 	{
@@ -73,11 +62,11 @@ public class AnimationControlls : MonoBehaviour {
 		if (instantiatedImage) {
 			Destroy (instantiatedImage);
 		}
-		audio.clip = audioTest;
+		audioSource.clip = audioTest;
 		audiolenght = audioTest.length;
-		audio.Play ();
+		audioSource.Play ();
 		StartCoroutine (stopFirstanimation ());
-		StartCoroutine (ActivateObjects (objectinHand));
+		//StartCoroutine (ActivateObjects (objectinHand));
 	}
 
 	public IEnumerator ActivateObjects (objectsinHand Keys) {
@@ -123,8 +112,14 @@ public class AnimationControlls : MonoBehaviour {
 	public IEnumerator emmotionStart(FaceExpressions Key) {
 		foreach (var obj in Key.expressionTimes) {
 			Material[] mat = mainBody.materials;
-			mat [2] = obj.faceAction[charecterSelectionIndex];
-			mainBody.materials = mat;
+            foreach (var objects in expressionHolder.expressions)
+            {
+                if (objects.expressionName == obj.expressionName)
+                {
+                    mainBody.material = objects.actions[charecterSelectionIndex];
+                }
+            }
+			
 			yield return new WaitForSeconds (obj.time);
 		}
 	}
@@ -177,15 +172,6 @@ public class AnimationControlls : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (time);
 	}
-
-	public void StartAR() 
-	{
-		arCamera.SetActive (true);
-		mainMenu.SetActive (false);
-		effectSelectionScreen.SetActive(false);
-		effectSelectionCamera.SetActive (false);	
-	}
-
 }
 
 [System.Serializable]

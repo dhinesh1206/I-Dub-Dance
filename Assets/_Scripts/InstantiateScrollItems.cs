@@ -32,7 +32,7 @@ public class InstantiateScrollItems : MonoBehaviour {
 	public Ease easeType;
 	public Animator renderTexturemodalAnimator;
 	public GameObject SelectOption;
-
+    public ExpressionHolder expressionHolder;
 
 	public int charecterSelectionindex;
 
@@ -163,7 +163,12 @@ public class InstantiateScrollItems : MonoBehaviour {
 		foreach (var obj in Key.expressionTimes) {
 					yield return new WaitForSeconds (obj.time);
 					Material[] mat = boyBody.materials;
-					mat [2] = obj.faceAction[charecterSelectionindex];
+					//mat [2] = obj.faceAction[charecterSelectionindex];
+                    foreach(var objects  in expressionHolder.expressions) {
+                        if(objects.expressionName == obj.expressionName) {
+                          mat[2] = objects.actions[charecterSelectionindex];
+                        }
+                    }
 					boyBody.materials = mat;
 				}
 	}
@@ -199,6 +204,7 @@ public class ButtonNames {
 	//public float[] fallingObjectsTiming;
 	public Color iconTextBgColor;
 	public Color iconTextColor;
+
 	public FaceExpressions expTime;
 	//public Sprite[] fallingobjects;
 	//public List<FallObjectsIming> fallinObjects;
@@ -242,7 +248,14 @@ public class FaceExpressions {
 [System.Serializable]
 public class expressionTime {
 	public float time;
-	public List<Material> faceAction;
+    public string expressionName;
+	//public List<Material> faceAction;
+}
+
+[System.Serializable]
+public class ExpressionsNames {
+    public string expressionName;
+    public List<Material> actions;
 }
 
 [System.Serializable]
@@ -256,22 +269,11 @@ public class AnimationTitle {
 }
 
 [System.Serializable]
-public class FallObjectsIming {
-	public float startTime;
-	public float EndTime;
-	public float intervalTiming;
-	public GameObject[] fallingObjects;
-}
-
-[System.Serializable]
 public class TestScroll {
-	public int Index;
 	public Transform animationbuttinParent;
 	public Transform effectbuttonParent;
 	public Transform AnimationListView;
-	public GameObject bgImahe;
 	public GameObject[] smallcharImagesBg;
-	public Transform logoinitiationParent;
 	public Transform titlebuttonParent;
 	public GameObject screenName;
 	public bool effects;
@@ -279,6 +281,7 @@ public class TestScroll {
 	public GameObject effectinstantiated;
 	public List<EffectsImage> effectImage;
 	public List<AnimationTitle> animationTitle;
+    public Toggle borderToggle;
 	public Ease easeType;
 	public GameObject SelectOption;
 }

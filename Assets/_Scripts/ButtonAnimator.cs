@@ -12,9 +12,9 @@ public class ButtonAnimator : MonoBehaviour {
 	public AudioClip audios;
 	public RenderTexture RenderImage;
 	public Ease easeType;
-	public List<FallObjectsIming> fallingObjects;
 	public objectsinHand objs;
 	public GameObject screenToActivate;
+    public Toggle borderToggle;
 
 	void Start () {
 		
@@ -28,12 +28,11 @@ public class ButtonAnimator : MonoBehaviour {
 		//InstantiateScrollItems.instance.AnimationCalled (DanceMove, audios, expTime);
 		TestScrollItems.instance.AnimationCalled (DanceMove, audios, expTime, objs);
 		RecScript.instance.screenName = screenToActivate;
+        RecScript.instance.borderToggle = borderToggle;
 		AnimationControlls.instance.Keyword = DanceMove;
 		AnimationControlls.instance.audioTest = audios;
-		AnimationControlls.instance.fallingObjects = fallingObjects;
 		AnimationControlls.instance.expTime = expTime;
-		AnimationControlls.instance.objectinHand = objs;
-		AnimationControlls.instance.fallingObjects = fallingObjects;
+		//AnimationControlls.instance.objectinHand = objs;
 	}
 
 	public void OnEffectClick() {

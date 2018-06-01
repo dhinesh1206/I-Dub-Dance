@@ -20,6 +20,8 @@ public class RecScript : MonoBehaviour {
 	public bool isRecordingComplete;
 	public GameObject screenName;
 
+    public Toggle borderToggle;
+
 	public GameObject mainMenu;
 
 	void Awake(){
@@ -62,7 +64,7 @@ public class RecScript : MonoBehaviour {
 	}
 
 	public void RecordWithMicroPhone() {
-		if (screenName) {
+        if (screenName && borderToggle.isOn) {
 			screenName.SetActive (true);
 		}
 		if (!ReplayKit.isRecording) {
@@ -76,7 +78,7 @@ public class RecScript : MonoBehaviour {
 	}
 
 	public void RecordWithoutMicrophone() {
-		if (screenName) {
+        if (screenName && borderToggle.isOn) {
 			screenName.SetActive (true);
 		}
 		if (!ReplayKit.isRecording) {

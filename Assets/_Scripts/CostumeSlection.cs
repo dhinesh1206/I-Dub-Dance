@@ -17,13 +17,13 @@ public class CostumeSlection : MonoBehaviour {
 	public List<CharecterStyle> stylebodyparts;
 	public Material transparentMaterial;
 	public Ease stageease;
-	public List<TestMateria> materials;
+    public List<Material> materials;
 
 	void Start () {
 		foreach (var obj in stylebodyparts) {
-			Material[] mat = obj.body.materials;
-			mat[0] = Resources.Load("Test") as Material;
-			obj.body.materials = mat;
+			//Material[] mat = obj.body.materials;
+			////mat[0] = Resources.Load("Test") as Material;
+			//obj.body.materials = mat;
 		}
 
 	}
@@ -53,10 +53,7 @@ public class CostumeSlection : MonoBehaviour {
 					objects.fullConstume [objects.Index].SetActive (false);
 					objects.Index = objects.Index + 1 != objects.fullConstume.Count ? objects.Index + 1 : 0; 
 					objects.fullConstume [objects.Index].SetActive (true);
-					Material[] mat = objects.body.materials;
-					mat [1] = objects.bodyMaterial[objects.Index];
-					mat [2] = objects.faceexpression [objects.Index];
-					objects.body.materials = mat;
+                    objects.body.material = objects.faceexpression[objects.Index];
 					AnimationControlls.instance.charecterSelectionIndex = objects.Index;
 					TestScrollItems.instance.charecterSelectionindex = objects.Index;
 					CharecterStage.DOLocalMoveY (-0.7f, 0.5f, false).SetEase (stageease);
@@ -85,10 +82,8 @@ public class CostumeSlection : MonoBehaviour {
 					objects.fullConstume [objects.Index].SetActive (false);
 					objects.Index = objects.Index - 1 > -1 ? objects.Index - 1 : objects.fullConstume.Count - 1; 
 					objects.fullConstume [objects.Index].SetActive (true);
-					Material[] mat = objects.body.materials;
-					mat [1] = objects.bodyMaterial [objects.Index];
-					mat [2] = objects.faceexpression [objects.Index];
-					objects.body.materials = mat;
+					
+                    objects.body.material = objects.faceexpression[objects.Index];
 					AnimationControlls.instance.charecterSelectionIndex = objects.Index;
 					TestScrollItems.instance.charecterSelectionindex = objects.Index;
 					CharecterStage.DOLocalMoveY (-0.7f, 0.25f, false).SetEase (Ease.Linear);
@@ -104,15 +99,14 @@ public class CharecterStyle
 	public List<GameObject> Dress;
 	public List<GameObject> hair;
 	public List<GameObject> fullConstume;
-	public List<Material> bodyMaterial;
 	public List<Material> faceexpression;
 	public Renderer body;
 	public int Index = 0;
 }
 
-[System.Serializable]
-public class TestMateria 
-{
-	public Material bodymaterial;
-	public Material hairmaterial;
-}
+//[System.Serializable]
+//public class TestMateria 
+//{
+//	public Material bodymaterial;
+//	public Material hairmaterial;
+//}
