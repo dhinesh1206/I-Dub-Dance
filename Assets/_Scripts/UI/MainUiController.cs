@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using Vuforia;
 
 public class MainUiController : MonoBehaviour {
@@ -12,7 +11,6 @@ public class MainUiController : MonoBehaviour {
 	public AudioSource uiCharecterAudio;
 	public Animator uicharecterAnimator;
 	public GameObject[] screens;
-    public Camera maincam;
 	public List<ScreensList> allScreenSet;
 	public GameObject Arcamera;
 	public int themeIndex;
@@ -21,20 +19,16 @@ public class MainUiController : MonoBehaviour {
 
 	public bool effectsinstantiated =  false;
 
-    public void Start()
-    {
-        if(allScreenSet[3].Screens[themeIndex])
-        allScreenSet[3].Screens[themeIndex].SetActive(false);
-        Arcamera.SetActive(false);
-    }
-
-
-    void Awake() {
+	void Awake() {
 		instance = this;
 	}
 
 	public void CharecterSelectionDone(){
+		//InstantiateScrollItems.instance.effects = false;
+
 		allScreenSet [0].Screens [themeIndex].SetActive (false);
+		//screens [0].SetActive (false);
+
 		allScreenSet[1].Screens[themeIndex].SetActive(true);
 		TestScrollItems.instance.effects = false;
 		TestScrollItems.instance.InstantiateCalled ();
@@ -42,6 +36,8 @@ public class MainUiController : MonoBehaviour {
 
 	public void AnimationSelectionDone() {
 		TestScrollItems.instance.effects = true;
+		//TestScrollItems.instance.effects = true;
+
 		if (!effectsinstantiated) {
 			TestScrollItems.instance.InstantiateCalled ();
 			effectsinstantiated = true;
@@ -55,9 +51,8 @@ public class MainUiController : MonoBehaviour {
 	}
 
 	public void EffectSelectionDone() {
+		
 		allScreenSet[2].Screens[themeIndex].SetActive(false);
-        Arcamera.SetActive(true);
-        maincam.gameObject.SetActive(false);
 		plane.enabled = true;
 		TestScrollItems.instance.effects = false;
 	}
@@ -74,8 +69,6 @@ public class MainUiController : MonoBehaviour {
 		if(RecScript.instance.screenName)
 		RecScript.instance.screenName.SetActive (false);
 		RecScript.instance.screenName = null;
-        maincam.gameObject.SetActive(true);
-        Arcamera.SetActive(false);
 		foreach (GameObject mainScreen in allScreenSet[3].Screens) {
 			mainScreen.SetActive (false);
 		}
