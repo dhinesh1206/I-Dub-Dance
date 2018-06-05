@@ -203,7 +203,7 @@ public class ButtonNames {
 	public FaceExpressions expTime;
 	//public Sprite[] fallingobjects;
 	//public List<FallObjectsIming> fallinObjects;
-	public objectsinHand objectsinHand;
+	//public objectsinHand objectsinHand;
 	public GameObject borderscreen;
 }
 

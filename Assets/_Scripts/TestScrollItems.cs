@@ -112,7 +112,7 @@ public class TestScrollItems : MonoBehaviour {
 			if(name.borderscreen)
 			obj.GetComponentInChildren<ButtonAnimator> ().screenToActivate = name.borderscreen;
 			obj.GetComponentInChildren<ButtonAnimator> ().audios = name.audios;
-			obj.GetComponentInChildren<ButtonAnimator> ().objs = name.objectsinHand;
+			//obj.GetComponentInChildren<ButtonAnimator> ().objs = name.objectsinHand;
 			obj.GetComponentInChildren<ButtonAnimator> ().DanceMove = name.animationKey;
 			obj.GetComponentInChildren<ButtonAnimator> ().expTime = name.expTime;
 		}
