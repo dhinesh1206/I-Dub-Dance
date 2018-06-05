@@ -31,8 +31,6 @@ public class AnimationControlls : MonoBehaviour {
 	public GameObject arCamera;
 	public GameObject mainMenu;
 
-	public List<FallObjectsIming> fallingObjects;
-
 	public FaceExpressions expTime;
 	public Renderer mainBody;
 
@@ -40,6 +38,7 @@ public class AnimationControlls : MonoBehaviour {
 	public int charecterSelectionIndex;
 	public Transform[] fallingObjectsParent;
 	public GameObject fallingObjectsEndParent;
+    public Expressions expressions;
 
 	private GameObject[] temp;
 
@@ -122,10 +121,14 @@ public class AnimationControlls : MonoBehaviour {
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
 		foreach (var obj in Key.expressionTimes) {
-			Material[] mat = mainBody.materials;
-			mat [2] = obj.faceAction[charecterSelectionIndex];
-			mainBody.materials = mat;
-			yield return new WaitForSeconds (obj.time);
+            foreach(var objects in expressions.expressions) {
+                if(objects.name == obj.name) {
+                    yield return new WaitForSeconds(obj.time);
+                    Material[] mat = mainBody.materials;
+                    mat[1] = objects.faceactions[charecterSelectionIndex];
+                    mainBody.materials = mat;
+                }
+            }
 		}
 	}
 

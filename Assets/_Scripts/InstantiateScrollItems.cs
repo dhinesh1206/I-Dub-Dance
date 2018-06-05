@@ -161,9 +161,10 @@ public class InstantiateScrollItems : MonoBehaviour {
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
 		foreach (var obj in Key.expressionTimes) {
+            
 					yield return new WaitForSeconds (obj.time);
 					Material[] mat = boyBody.materials;
-					mat [2] = obj.faceAction[charecterSelectionindex];
+					//mat [2] = obj.faceAction[charecterSelectionindex];
 					boyBody.materials = mat;
 				}
 	}
@@ -242,7 +243,13 @@ public class FaceExpressions {
 [System.Serializable]
 public class expressionTime {
 	public float time;
-	public List<Material> faceAction;
+    public string name;
+}
+
+[System.Serializable]
+public class expressionName {
+    public string name;
+    public List<Material> faceactions;
 }
 
 [System.Serializable]
@@ -253,14 +260,6 @@ public class AnimationTitle {
 	public Color smallImagesColor;
 	public List<ButtonNames> Animations;
 
-}
-
-[System.Serializable]
-public class FallObjectsIming {
-	public float startTime;
-	public float EndTime;
-	public float intervalTiming;
-	public GameObject[] fallingObjects;
 }
 
 [System.Serializable]

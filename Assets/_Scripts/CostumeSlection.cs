@@ -20,11 +20,11 @@ public class CostumeSlection : MonoBehaviour {
 	public List<TestMateria> materials;
 
 	void Start () {
-		foreach (var obj in stylebodyparts) {
-			Material[] mat = obj.body.materials;
-			mat[0] = Resources.Load("Test") as Material;
-			obj.body.materials = mat;
-		}
+		//foreach (var obj in stylebodyparts) {
+		//	Material[] mat = obj.body.materials;
+		//	mat[0] = Resources.Load("Test") as Material;
+		//	obj.body.materials = mat;
+		//}
 
 	}
 
@@ -54,8 +54,8 @@ public class CostumeSlection : MonoBehaviour {
 					objects.Index = objects.Index + 1 != objects.fullConstume.Count ? objects.Index + 1 : 0; 
 					objects.fullConstume [objects.Index].SetActive (true);
 					Material[] mat = objects.body.materials;
-					mat [1] = objects.bodyMaterial[objects.Index];
-					mat [2] = objects.faceexpression [objects.Index];
+					mat [0] = objects.bodyMaterial[objects.Index];
+					mat [1] = objects.faceexpression [objects.Index];
 					objects.body.materials = mat;
 					AnimationControlls.instance.charecterSelectionIndex = objects.Index;
 					TestScrollItems.instance.charecterSelectionindex = objects.Index;
@@ -86,8 +86,8 @@ public class CostumeSlection : MonoBehaviour {
 					objects.Index = objects.Index - 1 > -1 ? objects.Index - 1 : objects.fullConstume.Count - 1; 
 					objects.fullConstume [objects.Index].SetActive (true);
 					Material[] mat = objects.body.materials;
-					mat [1] = objects.bodyMaterial [objects.Index];
-					mat [2] = objects.faceexpression [objects.Index];
+					mat [0] = objects.bodyMaterial [objects.Index];
+					mat [1] = objects.faceexpression [objects.Index];
 					objects.body.materials = mat;
 					AnimationControlls.instance.charecterSelectionIndex = objects.Index;
 					TestScrollItems.instance.charecterSelectionindex = objects.Index;

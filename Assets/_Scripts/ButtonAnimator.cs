@@ -12,7 +12,6 @@ public class ButtonAnimator : MonoBehaviour {
 	public AudioClip audios;
 	public RenderTexture RenderImage;
 	public Ease easeType;
-	public List<FallObjectsIming> fallingObjects;
 	public objectsinHand objs;
 	public GameObject screenToActivate;
 
@@ -30,10 +29,8 @@ public class ButtonAnimator : MonoBehaviour {
 		RecScript.instance.screenName = screenToActivate;
 		AnimationControlls.instance.Keyword = DanceMove;
 		AnimationControlls.instance.audioTest = audios;
-		AnimationControlls.instance.fallingObjects = fallingObjects;
 		AnimationControlls.instance.expTime = expTime;
 		AnimationControlls.instance.objectinHand = objs;
-		AnimationControlls.instance.fallingObjects = fallingObjects;
 	}
 
 	public void OnEffectClick() {

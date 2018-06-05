@@ -13,11 +13,19 @@ public class MainUiController : MonoBehaviour {
 	public GameObject[] screens;
 	public List<ScreensList> allScreenSet;
 	public GameObject Arcamera;
+    public Camera maincam;
 	public int themeIndex;
 	public List<recodingActivatingscreen> recScreens;
 	public GameObject activeRecordScreen;
 
 	public bool effectsinstantiated =  false;
+
+    public void Start()
+    {
+        if (allScreenSet[3].Screens[themeIndex])
+            allScreenSet[3].Screens[themeIndex].SetActive(false);
+        Arcamera.SetActive(false);
+    }
 
 	void Awake() {
 		instance = this;
@@ -51,7 +59,8 @@ public class MainUiController : MonoBehaviour {
 	}
 
 	public void EffectSelectionDone() {
-		
+        Arcamera.SetActive(true);
+        maincam.gameObject.SetActive(false);
 		allScreenSet[2].Screens[themeIndex].SetActive(false);
 		plane.enabled = true;
 		TestScrollItems.instance.effects = false;
@@ -69,6 +78,8 @@ public class MainUiController : MonoBehaviour {
 		if(RecScript.instance.screenName)
 		RecScript.instance.screenName.SetActive (false);
 		RecScript.instance.screenName = null;
+        maincam.gameObject.SetActive(true);
+        Arcamera.SetActive(false);
 		foreach (GameObject mainScreen in allScreenSet[3].Screens) {
 			mainScreen.SetActive (false);
 		}

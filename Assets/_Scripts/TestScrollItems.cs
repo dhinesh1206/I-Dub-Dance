@@ -22,6 +22,7 @@ public class TestScrollItems : MonoBehaviour {
 	public Animator renderTexturemodalAnimator;
 	public Text animationNameText;
 
+    public Expressions expressions;
 	public static TestScrollItems instance;
 	// Use this for initialization
 	void Start () {
@@ -220,10 +221,16 @@ public class TestScrollItems : MonoBehaviour {
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
 		foreach (var obj in Key.expressionTimes) {
-			yield return new WaitForSeconds (obj.time);
-			Material[] mat = boyBody.materials;
-			mat [2] = obj.faceAction[charecterSelectionindex];
-			boyBody.materials = mat;
+            foreach (var objects in expressions.expressions)
+            {
+                if (objects.name == obj.name)
+                {
+                    yield return new WaitForSeconds(obj.time);
+                    Material[] mat = boyBody.materials;
+                    mat[1] = objects.faceactions[charecterSelectionindex];
+                    boyBody.materials = mat;
+                }
+            }
 		}
 	}
 

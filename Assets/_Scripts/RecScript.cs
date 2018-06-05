@@ -16,6 +16,7 @@ public class RecScript : MonoBehaviour {
 	public delegate void RecordPressed();
 	public static event RecordPressed RecordPlayer;
 	public Animator charAnimator;
+    public Toggle borderToggle;
 	public AudioSource charAudio;
 	public bool isRecordingComplete;
 	public GameObject screenName;
@@ -62,7 +63,7 @@ public class RecScript : MonoBehaviour {
 	}
 
 	public void RecordWithMicroPhone() {
-		if (screenName) {
+        if (screenName && borderToggle) {
 			screenName.SetActive (true);
 		}
 		if (!ReplayKit.isRecording) {
@@ -76,7 +77,7 @@ public class RecScript : MonoBehaviour {
 	}
 
 	public void RecordWithoutMicrophone() {
-		if (screenName) {
+        if (screenName && borderToggle) {
 			screenName.SetActive (true);
 		}
 		if (!ReplayKit.isRecording) {
