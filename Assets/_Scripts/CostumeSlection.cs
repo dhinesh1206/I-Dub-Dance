@@ -47,7 +47,7 @@ public class CostumeSlection : MonoBehaviour {
 //			styles.Dress [clothIndex].SetActive (true);
 //			maincharecter.Dress [clothIndex].SetActive (true);
 		} else if(fullConstume == true) {
-			CharecterStage.DOLocalMoveY (-5, 0.5f, false).SetEase (stageease).OnComplete (() => {
+			//CharecterStage.DOLocalMoveY (-5, 0.5f, false).SetEase (stageease).OnComplete (() => {
 				foreach (var objects in stylebodyparts) 
 				{
 					objects.fullConstume [objects.Index].SetActive (false);
@@ -61,7 +61,7 @@ public class CostumeSlection : MonoBehaviour {
 					TestScrollItems.instance.charecterSelectionindex = objects.Index;
 					CharecterStage.DOLocalMoveY (-0.7f, 0.5f, false).SetEase (stageease);
 				}
-			});
+			//});
 		}
 	}
 
@@ -80,7 +80,7 @@ public class CostumeSlection : MonoBehaviour {
 //			styles.Dress [clothIndex].SetActive (true);
 //			maincharecter.Dress [clothIndex].SetActive (true);
 		} else if(fullConstume == true) {
-			CharecterStage.DOLocalMoveY (-5, 0.5f, false).SetEase (stageease).OnComplete (() => {
+			//CharecterStage.DOLocalMoveY (-5, 0.5f, false).SetEase (stageease).OnComplete (() => {
 				foreach (var objects in stylebodyparts) {
 					objects.fullConstume [objects.Index].SetActive (false);
 					objects.Index = objects.Index - 1 > -1 ? objects.Index - 1 : objects.fullConstume.Count - 1; 
@@ -93,7 +93,7 @@ public class CostumeSlection : MonoBehaviour {
 					TestScrollItems.instance.charecterSelectionindex = objects.Index;
 					CharecterStage.DOLocalMoveY (-0.7f, 0.25f, false).SetEase (Ease.Linear);
 				}
-			});
+			//});
 		}
 	}
 }
