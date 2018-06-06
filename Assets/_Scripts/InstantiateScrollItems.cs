@@ -160,13 +160,16 @@ public class InstantiateScrollItems : MonoBehaviour {
 	}
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
-		foreach (var obj in Key.expressionTimes) {
+
+     //   if()
+
+	//	foreach (var obj in Key.expressionTimes) {
             
-					yield return new WaitForSeconds (obj.time);
-					Material[] mat = boyBody.materials;
+				yield return new WaitForSeconds (0);
+	//				Material[] mat = boyBody.materials;
 					//mat [2] = obj.faceAction[charecterSelectionindex];
-					boyBody.materials = mat;
-				}
+	//				boyBody.materials = mat;
+	//			}
 	}
 
 	public void EffectAnimationcalled(string Key, GameObject logo, FaceExpressions expTime) 
@@ -201,6 +204,7 @@ public class ButtonNames {
 	public Color iconTextBgColor;
 	public Color iconTextColor;
 	public FaceExpressions expTime;
+    //public string expressionname;
 	//public Sprite[] fallingobjects;
 	//public List<FallObjectsIming> fallinObjects;
 	//public objectsinHand objectsinHand;
@@ -237,7 +241,7 @@ public class EffectsImage {
 [System.Serializable]
 
 public class FaceExpressions {
-	public List<expressionTime> expressionTimes;
+    public string expressionName;
 }
 
 [System.Serializable]
@@ -280,4 +284,11 @@ public class TestScroll {
 	public List<AnimationTitle> animationTitle;
 	public Ease easeType;
 	public GameObject SelectOption;
+}
+
+[System.Serializable]
+public class expressionKeys
+{
+    public List<expressionTime> expressionTimes;
+    public string dancename;
 }

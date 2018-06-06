@@ -19,9 +19,7 @@ public class TestScrollItems : MonoBehaviour {
 	public GameObject headingButton;
 	public GameObject renderTexturePrefab;
 	public int charecterSelectionindex;
-	public Animator renderTexturemodalAnimator;
-	public Text animationNameText;
-
+	public Animator renderTexturemodalAnimator;   
     public Expressions expressions;
 	public static TestScrollItems instance;
 	// Use this for initialization
@@ -220,18 +218,43 @@ public class TestScrollItems : MonoBehaviour {
 	}
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
-		foreach (var obj in Key.expressionTimes) {
-            foreach (var objects in expressions.expressions)
+		//foreach (var obj in Key.expressionTimes) {
+        //    foreach (var objects in expressions.expressions)
+      //      {
+       //         if (objects.name == obj.name)
+      //          {
+       //             yield return new WaitForSeconds(obj.time);
+       //             Material[] mat = boyBody.materials;
+       //             mat[1] = objects.faceactions[charecterSelectionindex];
+       //             boyBody.materials = mat;
+      //          }
+      //      }
+	//	}
+
+        foreach( var obj in expressions.expressionPoints)
+        {
+           if(obj.dancename == Key.expressionName)
             {
-                if (objects.name == obj.name)
+                foreach(var objects in expressions.expressions)
                 {
-                    yield return new WaitForSeconds(obj.time);
-                    Material[] mat = boyBody.materials;
-                    mat[1] = objects.faceactions[charecterSelectionindex];
-                    boyBody.materials = mat;
+                        foreach( var ob in obj.expressionTimes)
+                        {
+                            foreach (var time in expressions.expressions)
+                            {
+                                print(time.name);
+                                print(ob.name);
+                                if(time.name == ob.name)
+                                {
+                                    yield return new WaitForSeconds(ob.time);
+                                    Material[] mat = boyBody.materials;
+                                    mat[1] = time.faceactions[charecterSelectionindex];
+                                    boyBody.materials = mat;
+                                }
+                            }
+                    }
                 }
             }
-		}
+        }
 	}
 
 	public void EffectAnimationcalled(string Key, GameObject logo, FaceExpressions expTime) 

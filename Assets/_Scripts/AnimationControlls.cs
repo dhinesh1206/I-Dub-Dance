@@ -120,17 +120,32 @@ public class AnimationControlls : MonoBehaviour {
 	}
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
-		foreach (var obj in Key.expressionTimes) {
-            foreach(var objects in expressions.expressions) {
-                if(objects.name == obj.name) {
-                    yield return new WaitForSeconds(obj.time);
-                    Material[] mat = mainBody.materials;
-                    mat[1] = objects.faceactions[charecterSelectionIndex];
-                    mainBody.materials = mat;
+        foreach (var obj in expressions.expressionPoints)
+        {
+            if (obj.dancename == Key.expressionName)
+            {
+                foreach (var objects in expressions.expressions)
+                {
+                    if (objects.name == obj.dancename)
+                    {
+                        foreach (var ob in obj.expressionTimes)
+                        {
+                            foreach (var time in expressions.expressions)
+                            {
+                                if (time.name == ob.name)
+                                {
+                                    yield return new WaitForSeconds(ob.time);
+                                    Material[] mat = mainBody.materials;
+                                    mat[1] = time.faceactions[charecterSelectionIndex];
+                                    mainBody.materials = mat;
+                                }
+                            }
+                        }
+                    }
                 }
             }
-		}
-	}
+        }
+    }
 
 	public IEnumerator stopFirstanimation() {
 		yield return new WaitForSeconds (audiolenght);
