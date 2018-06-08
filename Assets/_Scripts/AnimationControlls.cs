@@ -120,6 +120,7 @@ public class AnimationControlls : MonoBehaviour {
 	}
 
 	public IEnumerator emmotionStart(FaceExpressions Key) {
+        yield return new WaitForSeconds(0.001f);
         foreach (var obj in expressions.expressionPoints)
         {
             if (obj.dancename == Key.expressionName)
@@ -134,10 +135,9 @@ public class AnimationControlls : MonoBehaviour {
                             {
                                 if (time.name == ob.name)
                                 {
-                                    yield return new WaitForSeconds(ob.time);
                                     Material[] mat = mainBody.materials;
                                     mat[1] = time.faceactions[charecterSelectionIndex];
-                                    mainBody.materials = mat;
+                                    StartCoroutine(emotionsKeyStart(ob.time, mat));
                                 }
                             }
                         }
@@ -145,6 +145,11 @@ public class AnimationControlls : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public IEnumerator emotionsKeyStart(float time, Material[] material) {
+        yield return new WaitForSeconds(time);
+        mainBody.materials = material;
     }
 
 	public IEnumerator stopFirstanimation() {

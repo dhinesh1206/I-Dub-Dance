@@ -22,15 +22,17 @@ public class TestScrollItems : MonoBehaviour {
 	public Animator renderTexturemodalAnimator;   
     public Expressions expressions;
 	public static TestScrollItems instance;
+    AudioSource source;
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update () 
+    {
+        
+    }
 
 	public void DestroyObjects() {
 		foreach (Transform obj in ScrollItems[ThemeIndex].titlebuttonParent) {
@@ -56,7 +58,6 @@ public class TestScrollItems : MonoBehaviour {
 	void Awake() 
 	{
 		instance = this;
-
 	}
 
 
@@ -116,7 +117,8 @@ public class TestScrollItems : MonoBehaviour {
 		}
 	}
 
-	public IEnumerator StopAnimation(float time) {
+	public IEnumerator StopAnimation(float time) 
+    {
 		yield return new WaitForSeconds (time);
 		animationCharecter.Play ("Idle");
 	}
@@ -190,7 +192,7 @@ public class TestScrollItems : MonoBehaviour {
 		}
 		bodyAudio.clip = Audio;
 		bodyAudio.Play ();
-		StartCoroutine (emmotionStart (Test));
+        StartCoroutine (emmotionStart (Test));
 		StartCoroutine (StopAnimation (Audio.length));
 		animationCharecter.Play (key);
 		StartCoroutine (ActivateObjects (objs));
@@ -217,45 +219,102 @@ public class TestScrollItems : MonoBehaviour {
 		obj.SetActive (false);
 	}
 
-	public IEnumerator emmotionStart(FaceExpressions Key) {
-		//foreach (var obj in Key.expressionTimes) {
-        //    foreach (var objects in expressions.expressions)
-      //      {
-       //         if (objects.name == obj.name)
-      //          {
-       //             yield return new WaitForSeconds(obj.time);
-       //             Material[] mat = boyBody.materials;
-       //             mat[1] = objects.faceactions[charecterSelectionindex];
-       //             boyBody.materials = mat;
-      //          }
-      //      }
-	//	}
+	//public IEnumerator emmotionStart(FaceExpressions Key) {
+	//	//foreach (var obj in Key.expressionTimes) {
+ //       //    foreach (var objects in expressions.expressions)
+ //     //      {
+ //      //         if (objects.name == obj.name)
+ //     //          {
+ //      //             yield return new WaitForSeconds(obj.time);
+ //      //             Material[] mat = boyBody.materials;
+ //      //             mat[1] = objects.faceactions[charecterSelectionindex];
+ //      //             boyBody.materials = mat;
+ //     //          }
+ //     //      }
+	////	}
 
-        foreach( var obj in expressions.expressionPoints)
+ //       foreach( var obj in expressions.expressionPoints)
+ //       {
+ //          if(obj.dancename == Key.expressionName)
+ //           {
+ //               foreach(var objects in expressions.expressions)
+ //               {
+ //                       foreach( var ob in obj.expressionTimes)
+ //                       {
+ //                           foreach (var time in expressions.expressions)
+ //                           {
+ //                               print(time.name);
+ //                               print(ob.name);
+ //                               if(time.name == ob.name)
+ //                               {
+ //                                   yield return new WaitForSeconds(ob.time);
+ //                                   Material[] mat = boyBody.materials;
+ //                                   mat[1] = time.faceactions[charecterSelectionindex];
+ //                                   boyBody.materials = mat;
+ //                               }
+ //                           }
+ //                   }
+ //               }
+ //           }
+ //       }
+	//}
+
+    public IEnumerator emmotionStart(FaceExpressions Key)
+    {
+        //StartCoroutine(PlayReactions(expressions.expressionPoints[0]));
+        foreach (var obj in expressions.expressionPoints)
         {
-           if(obj.dancename == Key.expressionName)
+            if (obj.dancename == Key.expressionName)
             {
-                foreach(var objects in expressions.expressions)
+                foreach (var objects in expressions.expressions)
                 {
-                        foreach( var ob in obj.expressionTimes)
+                        foreach (var ob in obj.expressionTimes)
                         {
                             foreach (var time in expressions.expressions)
                             {
-                                print(time.name);
-                                print(ob.name);
-                                if(time.name == ob.name)
+                                if (time.name == ob.name)
                                 {
-                                    yield return new WaitForSeconds(ob.time);
                                     Material[] mat = boyBody.materials;
                                     mat[1] = time.faceactions[charecterSelectionindex];
+                                    //StartCoroutine(emotionsKeyStart(ob.time, mat));
                                     boyBody.materials = mat;
+                                    yield return new WaitForSecondsRealtime(ob.time * 4.166f);
                                 }
                             }
-                    }
+                        }
                 }
             }
         }
-	}
+    }
+
+
+
+    Material[] SelectMaterial(string MatName)
+    {
+        foreach (var item in expressions.expressions)
+        {
+            if (item.name==MatName)
+            {
+                return item.faceactions.ToArray();
+            }
+        }
+        return null;
+    }
+
+    IEnumerator PlayReactions(expressionKeys keys)
+    {
+        for (int i = 0; i < keys.expressionTimes.Count; i++)
+        {
+            //float previousTime = i > 0 ? (keys.expressionTimes[i].time - keys.expressionTimes[i - 1].time) : keys.expressionTimes[i].time;
+            //yield return new WaitForSeconds(previousTime);
+            //boyBody.materials = SelectMaterial(keys.expressionTimes[i].name);
+            while(bodyAudio.time<keys.expressionTimes[i].time)
+            {
+                yield return null;
+            }
+            boyBody.materials = SelectMaterial(keys.expressionTimes[i].name);
+        }
+    }
 
 	public void EffectAnimationcalled(string Key, GameObject logo, FaceExpressions expTime) 
 	{
@@ -264,7 +323,7 @@ public class TestScrollItems : MonoBehaviour {
 			Destroy (effectinstantiated);
 		}
 		animationCharecter.Play(Key);
-		StartCoroutine (emmotionStart (expTime));
+        StartCoroutine(emmotionStart(expTime));
 		StartCoroutine (starteffect (animationCharecter.GetCurrentAnimatorClipInfo(0).Length,logo));
 	}
 	public IEnumerator starteffect(float time, GameObject logo)
