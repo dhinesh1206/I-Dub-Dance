@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using Vuforia;
 
 public class MainUiController : MonoBehaviour {
@@ -22,9 +23,12 @@ public class MainUiController : MonoBehaviour {
 
     public void Start()
     {
+		//Arcamera.SetActive(false);
+		XRSettings.enabled = false;
+		//maincam.gameObject.SetActive(true);
         if (allScreenSet[3].Screens[themeIndex])
             allScreenSet[3].Screens[themeIndex].SetActive(false);
-        Arcamera.SetActive(false);
+        //Arcamera.SetActive(false);
     }
 
 	void Awake() {
@@ -33,7 +37,7 @@ public class MainUiController : MonoBehaviour {
 
 	public void CharecterSelectionDone(){
 		//InstantiateScrollItems.instance.effects = false;
-
+		maincam.gameObject.SetActive(true);
 		allScreenSet [0].Screens [themeIndex].SetActive (false);
 		//screens [0].SetActive (false);
 
@@ -56,10 +60,11 @@ public class MainUiController : MonoBehaviour {
 		TestScrollItems.instance.CloseSideBar();
 		TestScrollItems.instance.DestroyEffectImages ();
 		uicharecterAnimator.Play ("Idle");
+		TestScrollItems.instance.stopallcoroutine ();
 	}
 
 	public void EffectSelectionDone() {
-        Arcamera.SetActive(true);
+		XRSettings.enabled = true;
         maincam.gameObject.SetActive(false);
 		allScreenSet[2].Screens[themeIndex].SetActive(false);
 		plane.enabled = true;
@@ -103,6 +108,7 @@ public class MainUiController : MonoBehaviour {
 		TestScrollItems.instance.bodyAudio.Stop ();
 		TestScrollItems.instance.animationCharecter.Play ("Idle");
 		TestScrollItems.instance.CloseSideBar ();
+		TestScrollItems.instance.stopallcoroutine ();
 		allScreenSet [1].Screens [themeIndex].SetActive (false);
 		allScreenSet [0].Screens [themeIndex].SetActive (true);
 	}
