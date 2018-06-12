@@ -24,7 +24,7 @@ public class MainUiController : MonoBehaviour {
     public void Start()
     {
 		//Arcamera.SetActive(false);
-		XRSettings.enabled = false;
+		//XRSettings.enabled = false;
 		//maincam.gameObject.SetActive(true);
         if (allScreenSet[3].Screens[themeIndex])
             allScreenSet[3].Screens[themeIndex].SetActive(false);
@@ -36,8 +36,9 @@ public class MainUiController : MonoBehaviour {
 	}
 
 	public void CharecterSelectionDone(){
-		//InstantiateScrollItems.instance.effects = false;
-		maincam.gameObject.SetActive(true);
+        //InstantiateScrollItems.instance.effects = false;
+       // Arcamera.SetActive(false);
+		//maincam.gameObject.SetActive(true);
 		allScreenSet [0].Screens [themeIndex].SetActive (false);
 		//screens [0].SetActive (false);
 
@@ -64,8 +65,9 @@ public class MainUiController : MonoBehaviour {
 	}
 
 	public void EffectSelectionDone() {
-		Arcamera.SetActive (true);
-        maincam.gameObject.SetActive(false);
+        ///Arcamera.SetActive (true);
+        // maincam.gameObject.SetActive(false);
+       // XRSettings.enabled = true;
 		allScreenSet[2].Screens[themeIndex].SetActive(false);
 		plane.enabled = true;
 		TestScrollItems.instance.effects = false;
@@ -83,8 +85,8 @@ public class MainUiController : MonoBehaviour {
 		if(RecScript.instance.screenName)
 		RecScript.instance.screenName.SetActive (false);
 		RecScript.instance.screenName = null;
-        maincam.gameObject.SetActive(true);
-        Arcamera.SetActive(false);
+////maincam.gameObject.SetActive(true);
+    //    Arcamera.SetActive(false);
 		foreach (GameObject mainScreen in allScreenSet[3].Screens) {
 			mainScreen.SetActive (false);
 		}

@@ -75,6 +75,7 @@ public class AnimationControlls : MonoBehaviour {
 		audio.clip = audioTest;
 		audiolenght = audioTest.length;
 		audio.Play ();
+        emmotionstart(expTime);
 		StartCoroutine (stopFirstanimation ());
 		StartCoroutine (ActivateObjects (objectinHand));
 	}
@@ -92,6 +93,69 @@ public class AnimationControlls : MonoBehaviour {
 			}
 		}
 	}
+
+    public void emmotionstart(FaceExpressions Key)
+    {
+        //int index = 0;
+        foreach (var obj in expressions.expressionPoints)
+        {
+            if (obj.dancename == Key.expressionName)
+            {
+                //foreach (var ob in obj.expressionTimes) {
+                //      foreach (var time in expressions.expressions) {
+                //              if (time.name == ob.name) {
+                //                  print (index);
+                //                  index++;
+                //
+                //                  Material[] mat = boyBody.materials;
+                //                  mat [1] = time.faceactions [charecterSelectionindex];
+                //                  boyBody.materials = mat;
+                //                  yield return new WaitForSecondsRealtime (ob.time * 4.166f);
+                //              }
+                //          }
+                //      }
+                //      print ("Finished");
+                //  }
+                StartCoroutine(PlayReactions(obj));
+            }
+        }
+    }
+
+    IEnumerator ReactionsPlay(Material[] mat, float time)
+    {
+        yield return new WaitForSeconds(time / 24);
+        mainBody.materials = mat;
+    }
+
+    IEnumerator PlayReactions(expressionKeys keys)
+    {
+        //    for (int i = 0; i < keys.expressionTimes.Count; i++)
+        //    {
+        //      
+        //      print (i);
+        //        float previousTime = i > 0 ? (keys.expressionTimes[i].time - keys.expressionTimes[i - 1].time) : keys.expressionTimes[i].time;
+        //        boyBody.materials = SelectMaterial(keys.expressionTimes[i].name);
+        //      print (previousTime);
+        //      yield return new WaitForSeconds(previousTime /24);
+        //}
+        yield return new WaitForSeconds(0f);
+        foreach (var obj in keys.expressionTimes)
+        {
+            StartCoroutine(ReactionsPlay(SelectMaterial(obj.name), obj.time));
+        }
+    }
+
+    Material[] SelectMaterial(string MatName)
+    {
+        foreach (var item in expressions.expressions)
+        {
+            if (item.name == MatName)
+            {
+                return item.faceactions.ToArray();
+            }
+        }
+        return null;
+    }
 
 	public IEnumerator DisableObjects( float time, GameObject obj ) {
 		yield return new WaitForSeconds (time);
