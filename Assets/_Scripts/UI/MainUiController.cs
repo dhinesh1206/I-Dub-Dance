@@ -64,7 +64,7 @@ public class MainUiController : MonoBehaviour {
 	}
 
 	public void EffectSelectionDone() {
-		XRSettings.enabled = true;
+		Arcamera.SetActive (true);
         maincam.gameObject.SetActive(false);
 		allScreenSet[2].Screens[themeIndex].SetActive(false);
 		plane.enabled = true;

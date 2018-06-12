@@ -125,39 +125,7 @@ public class TestScrollItems : MonoBehaviour {
 
 	public void InstantiateCalled() {
 		if (effects == false) {
-//				GameObject obj = Instantiate(headingButton, ScrollItems[ThemeIndex].titlebuttonParent, false);
-//				obj.transform.localScale = Vector3.one;
-//				obj.GetComponent<Image> ().sprite = objs.Icon;
-//				obj.GetComponent<TitleButtonController> ().bgColor = objs.bgColorCode;
-//				obj.GetComponent<TitleButtonController> ().smallIconsBgColor = objs.smallImagesColor;
-//				obj.GetComponent<TitleButtonController> ().animationNames = objs.Animations;
-//				obj.GetComponent<TitleButtonController> ().TitleParent = ScrollItems[ThemeIndex].titlebuttonParent;
-//				obj.GetComponent<TitleButtonController> ().color = objs.colorCode;
-
-//				GameObject obj = Instantiate (renderTexturePrefab, ScrollItems[ThemeIndex].animationbuttinParent, false);
-//				obj.transform.DOScale (Vector3.one, 0.5f).SetEase(ScrollItems[ThemeIndex].easeType);
-//				renderTexturemodalAnimator.Play(objs.renderTextureAnimationKey);
-//				RenderTexture rt = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
-//				rt.Create();
-//				renderTextureCamera.targetTexture = rt;
-//				obj.GetComponentInChildren<ButtonAnimator> ().RenderImage = rt;
-//				GameObject circ = obj.transform.GetChild(0).gameObject;
-//				circ.GetComponent<Image> ().color = objs.bgColor;
-//				obj.GetComponentInChildren<RawImage> ().texture = rt;
-//				//obj.GetComponentInChildren<ButtonAnimator> ().fallingObjects = name.fallinObjects;
-//				obj.transform.GetChild (1).GetComponent<Image> ().sprite = objs.hutBG;
-//				obj.transform.GetChild (3).GetComponent<Image> ().color = objs.iconTextBgColor;
-//				obj.transform.GetChild (4).GetComponent<Text> ().text = objs.IconText;
-//				obj.transform.GetChild (4).GetComponent<Text> ().font = objs.IconTextfontFont;
-//				obj.transform.GetChild (4).GetComponent<Text> ().color = objs.iconTextColor;
-//				obj.GetComponentInChildren<ButtonAnimator> ().audios = objs.audios;
-//				obj.GetComponentInChildren<ButtonAnimator> ().objs = objs.objectsinHand;
-//				obj.GetComponentInChildren<ButtonAnimator> ().DanceMove = objs.animationKey;
-//				obj.GetComponentInChildren<ButtonAnimator> ().expTime = objs.expTime;
-
 				AnimateList (ScrollItems[ThemeIndex].animationTitle[0].Animations,ScrollItems[ThemeIndex].animationTitle[0].colorCode,ScrollItems[ThemeIndex].animationTitle[0].bgColorCode,ScrollItems[ThemeIndex].animationTitle[0].smallImagesColor);
-
-
 		} else 
 		{
 			foreach (var effect in ScrollItems[ThemeIndex].effectImage) {
